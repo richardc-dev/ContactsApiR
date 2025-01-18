@@ -76,6 +76,97 @@ Follow these steps to download and start the API:
    php artisan serve
 7. **Test API**
    * Use Thunder Client in Visual Studio Code to make requests to the API endpoints.
+
+# **Endpoints**
+
+Below are the available endpoints in the API:
+
+1. **Create User**
+   - **URL:** `/api/createuser`
+   - **Method:** `POST`
+   - **Description:** Creates a new user in the database.
+   - **Body (JSON):**
+     ```json
+     {
+       "name": "User name",
+       "email": "email@example.com",
+       "password": "secure_password"
+     }
+     ```
+
+2. **Super User**
+   - Modify the data in the seeder and run `php artisan db:seed`. This is where you can create an admin user to manage other users.
+
+3. **Login User**
+   - **URL:** `/api/users`
+   - **Method:** `POST`
+   - **Description:** Validates the user and generates an API token.
+   - **Body (JSON):**
+     ```json
+     {
+       "email": "email@example.com",
+       "password": "secure_password"
+     }
+     ```
+
+#### All subsequent endpoints require authentication through `Auth::user()` and the use of generated tokens.
+
+4. **Get all users (Admin only)**
+   - **URL:** `/api/users`
+   - **Method:** `GET`
+   - **Description:** Retrieves a list of all registered users.
+
+5. **Add Contact**
+   - **URL:** `/api/contact`
+   - **Method:** `POST`
+   - **Description:** Adds a new contact for an authenticated user.
+   - **Body (JSON):**
+     ```json
+     {
+        "name":"name",
+        "last_name":"last name",
+        "email":"j@mail.com",
+        "phone":"123456",
+        "address":"street and number",
+        "city":"Santiago",
+        "country":"Chile",
+        "note":"notes"
+     }
+     ```
+6. **Get all contacts of a user**
+   - **URL:** `/api/contact`
+   - **Method:** `GET`
+   - **Description:** Retrieves all contacts for an authenticated user.
+
+7. **Get a Contact by ID**
+   - **URL:** `/api/contact/{id}`
+   - **Method:** `GET`
+   - **Description:** Retrieves the information of a specific contact using its ID.
+
+8. **Update Contact**
+   - **URL:** `/api/contact/{id}`
+   - **Method:** `PUT`
+   - **Description:** Updates the information of an existing contact.
+   - **Body (JSON):**
+     ```json
+     {
+        "name":"name",
+        "last_name":"last name",
+        "email":"j@mail.com",
+        "phone":"123456",
+        "address":"street and number",
+        "city":"Santiago",
+        "country":"Chile",
+        "note":"notes"
+     }
+     ```
+
+9. **Delete Contact**
+   - **URL:** `/api/contact/{id}`
+   - **Method:** `DELETE`
+   - **Description:** Deletes a specific contact of a user.
+
+
 # License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
